@@ -94,8 +94,8 @@
                                 <nav>
                                     <ul>
                                         <a style="margin-right:2rem" href="/"><b>Acasa</b></a>
-                                        <a style="margin-right:2rem" href="/"><b>Despre noi</b></a>
-                                        <a style="margin-right:2rem" href="/"><b>Contact</b></a>
+                                        <a style="margin-right:2rem" href="/despre-noi.html"><b>Despre noi</b></a>
+                                        <a style="margin-right:2rem" href="/contact.html"><b>Contact</b></a>
                                     </ul>
                                 </nav>
                             </div>
@@ -597,7 +597,7 @@
                                     <div class="dashboard__form__wraper">
                                         <div class="dashboard__form__input">
                                             <label for="#">Mesaj</label>
-                                            <textarea name="" id="mesaj" cols="30" rows="10">Mesaj...</textarea>
+                                            <textarea name="" id="mesaj" cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -624,7 +624,6 @@
             const mesaj = document.getElementById("mesaj");
 
             submit.addEventListener("click", function (event) {
-                alert("test");
                 sendEmail('https://api.aipro.ro:80/sendMail', 'quantumskills.org', 'eh5442133@gmail.com', `QuantumSkills.org - formularul de contact: ${name.value}`, `
             Nume: ${name.value} <br>
             Prenume: ${surname.value} <br>
@@ -640,61 +639,20 @@
             Telefon: ${phone.value} <br>
             Mesaj: ${mesaj.value} <br>
             `);
+                resetCheckForm("name");
+                resetCheckForm("surname");
+                resetCheckForm("email");
+                resetCheckForm("phone");
+                resetCheckForm("mesaj");
+
 
             });
 
+            function resetCheckForm(elemID) {
+                element = document.getElementById(elemID);
+                element.value = "";
+            }
 
-            //             contactForm.addEventListener("submit", function (event) {
-            //                 event.preventDefault(); // Prevent the default form submission
-
-            //                 alert('test');
-
-            //                 const name = document.getElementById("name");
-            //                 const email = document.getElementById("email");
-            //                 const phone = document.getElementById("phone");
-            //                 const mesaj = document.getElementById("mesaj");
-            //                 const submit = document.getElementById("submit");
-
-
-            //                 if (name.value && email.value && phone.value) {
-            //                     resetCheckForm("name");
-            //                     resetCheckForm("email");
-            //                     resetCheckForm("phone");
-            //                     resetCheckForm("mesaj");
-            //                     fetch('https://aipro.ro/api/trimite_sheet', {
-            //                         method: 'POST',
-            //                         headers: {
-            //                             'Content-Type': 'application/json'
-            //                         },
-            //                         body: JSON.stringify({
-            //                             "spreadsheetId": '1FaANFeivKVUB6LGp_4EN9OD8-6i1SGTM4w9yaDupXGg',
-            //                             "range": 'A2397',
-            //                             "values": ['Blackstar', `${name.value}`, '', `${email.value}`, `${phone.value}`, '', '', `${mesaj.value}`, '', '', '', '', '', '', '', '', '', '']
-            //                         })
-            //                     })
-            //                     sendEmail('https://api.aipro.ro:80/sendMail', 'blackstar.biz', 'dan@area4u.ro', `BlackStar.biz - formularul de contact: ${name.value}`, `
-            // Nume: ${name.value} <br>
-            // Email: ${email.value} <br>
-            // Telefon: ${phone.value} <br>
-            // Mesaj: ${mesaj.value} <br>
-            // `);
-            //                     sendEmail('https://api.aipro.ro:80/sendMail', 'blackstar.biz', 'ai@area4u.ro', `BlackStar.biz - formularul de contact: ${name.value}`, `
-            // Nume: ${name.value} <br>
-            // Email: ${email.value} <br>
-            // Telefon: ${phone.value} <br>
-            // Mesaj: ${mesaj.value} <br>
-            // `);
-            //                     submit.innerHTML = "Mesajul a fost trimis!";
-            //                 } else {
-            //                     checkForm("name");
-            //                     checkForm("email");
-            //                     checkForm("phone");
-            //                     checkForm("mesaj");
-            //                 }
-
-
-            //             });
-            // });
             function sendEmail(endpoint, projectID, email, subiect, continut) {
                 fetch(endpoint, {  //'https://api.aipro.ro:80/sendMail'
                     method: 'POST',
